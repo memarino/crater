@@ -3,6 +3,7 @@
 namespace Crater\Console\Commands;
 
 use Afip;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class feAfip extends Command
@@ -38,8 +39,29 @@ class feAfip extends Command
      */
     public function handle()
     {
-        $afip_fe = new Afip(array('CUIT' => 20263339615));
+        $options = [
+            'CUIT' => 20263339615,
+            'production' => false,
+            'passphrase' => "xxxxx",
+            'exceptions' => false,
+            'cert' => "homo_cert.crt",
+            'key' => "privada",
+        ];
 
+        $afip_fe = new Afip($options);
+
+        $last_voucher = intval($afip_fe->ElectronicBilling->GetLastVoucher(6,6)) + 1; //Devuelve el número del último comprobante creado para el punto de venta 1 y el tipo de comprobante 6 (Factura B)
+        dump($last_voucher);
+
+        //$last_authorized = $afip_fe->ElectronicBilling->GetLastVoucher(1,6);
+        //dump($last_authorized);
+
+        //GetVoucherInfo($number, $sales_point, $type)
+        //dd($afip_fe->ElectronicBilling->GetVoucherInfo($last_voucher-1, 6, 6));
+
+        $fecha = Carbon::now()->format('Ymd');
+        dump($fecha);
+        
         //$voucher_types = $afip_fe->ElectronicBilling->GetVoucherTypes();
         // 18 => {#2549
         //     +"Id": 11
@@ -56,9 +78,9 @@ class feAfip extends Command
             'Concepto' 	=> 1,  // Concepto del Comprobante: (1)Productos, (2)Servicios, (3)Productos y Servicios
             'DocTipo' 	=> 99, // Tipo de documento del comprador (99 consumidor final, ver tipos disponibles)
             'DocNro' 	=> 0,  // Número de documento del comprador (0 consumidor final)
-            'CbteDesde' 	=> 1,  // Número de comprobante o numero del primer comprobante en caso de ser mas de uno
-            'CbteHasta' 	=> 1,  // Número de comprobante o numero del último comprobante en caso de ser mas de uno
-            'CbteFch' 	=> intval(date('Ymd')), // (Opcional) Fecha del comprobante (yyyymmdd) o fecha actual si es nulo
+            'CbteDesde' 	=> $last_voucher,  // Número de comprobante o numero del primer comprobante en caso de ser mas de uno
+            'CbteHasta' 	=> $last_voucher,  // Número de comprobante o numero del último comprobante en caso de ser mas de uno
+            'CbteFch' 	=> $fecha, // (Opcional) Fecha del comprobante (yyyymmdd) o fecha actual si es nulo
             'ImpTotal' 	=> 121, // Importe total del comprobante
             'ImpTotConc' 	=> 0,   // Importe neto no gravado
             'ImpNeto' 	=> 100, // Importe neto gravado
