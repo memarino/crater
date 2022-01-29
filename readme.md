@@ -1,21 +1,26 @@
 <img src="https://res.cloudinary.com/bytefury/image/upload/v1574149856/Crater/craterframe.png">
 
 ## Introduction
-
-## Introduction
-seguir https://docs.craterapp.com/installation.html para instalar y levantar ambiente con docker.
-Luego instalar AFIP SDK para PHP:
-https://github.com/AfipSDK/afip.php
-
-composer require afipsdk/afip.php
-
 Crater is an open-source web & mobile app that helps you track expenses, payments & create professional invoices & estimates.
 
 Web Application is made using Laravel & VueJS while the Mobile Apps are built using React Native.
 
+## Instalacion
+- seguir https://docs.craterapp.com/installation.html para instalar y levantar ambiente con docker.
+
+- Luego instalar AFIP SDK para PHP: https://github.com/AfipSDK/afip.php
+
+*composer require afipsdk/afip.php*
+
+## Documentos AFIP para desarrolladores y Certificados de Homo
+  - https://www.afip.gob.ar/ws/WSAA/WSAAmanualDev.pdf
+  - https://www.afip.gob.ar/ws/WSASS/WSASS_como_adherirse.pdf
+
+  copiar la key provada y el certificado en <HOME_PROYECTO>/afipsdk/afip.php/src/afip_res
+
 # Table of Contents
 
-- [Table of Contents](#table-of-contents)
+  - [Table of Contents](#table-of-contents)
   - [Documentation](#documentation)
   - [Download](#download)
   - [Mobile Apps](#mobile-apps)
