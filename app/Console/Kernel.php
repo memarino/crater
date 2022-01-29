@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         Commands\UpdateCommand::class,
         Commands\CreateTemplateCommand::class,
         Commands\InstallModuleCommand::class,
+        Commands\feAfip::class,
     ];
 
     /**

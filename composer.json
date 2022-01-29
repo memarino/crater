@@ -9,6 +9,7 @@
   "type": "project",
   "require": {
     "php": "^7.4 || ^8.0",
+    "afipsdk/afip.php": "^0.7.3",
     "aws/aws-sdk-php": "^3.142",
     "barryvdh/laravel-dompdf": "^0.9.0",
     "crater-invoice/modules": "^1.0.0",
